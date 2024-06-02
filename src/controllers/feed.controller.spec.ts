@@ -26,7 +26,6 @@ jest.mock('axios', () => {
     get() {
       return {
         status: 200,
-        data: require('../../mocks/mock-feed.json'),
       };
     }
   }

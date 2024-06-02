@@ -2,6 +2,8 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { getConnection } from '../db/database';
 import { Sequelize } from 'sequelize';
 import getModel from '../models/request-log';
+import * as process from 'process';
+import { isTestEnv } from '../utils';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit {
@@ -16,6 +18,10 @@ export class DatabaseService implements OnModuleInit {
   }
 
   async syncDb() {
+    if (isTestEnv()) {
+      return;
+    }
+
     await this.getLoggerModel().sync();
   }
 }

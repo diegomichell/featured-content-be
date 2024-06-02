@@ -3,7 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('FeedController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -15,10 +15,33 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/feed/{language}/featured/{YYYY}/{MM}/{DD} (GET)', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+      .get('/feed/en/featured/2024/06/01')
+      .expect(200);
+  });
+
+  it('/feed/{language}/featured/{YYYY}/{MM} (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/feed/en/featured/2024/06')
+      .expect(404);
+  });
+
+  it('/feed/{language}/featured/{YYYY} (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/feed/en/featured/2024')
+      .expect(404);
+  });
+
+  it('/feed/featured/{YYYY}/{MM}/{DD} (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/feed/featured/2024/06/01')
+      .expect(404);
+  });
+
+  it('/feed/{language}/featured/{invalid_year}/{MM}/{DD} (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/feed/en/featured/20240000x02/06/01')
+      .expect(500);
   });
 });
