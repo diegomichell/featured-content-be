@@ -16,6 +16,6 @@ export class DatabaseService implements OnModuleInit {
   }
 
   async syncDb() {
-    await this.getLoggerModel().sync({ force: true });
+    await this.getLoggerModel().sync();
   }
 }

@@ -4,16 +4,16 @@ import {
   NestModule,
   OnModuleInit,
 } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { FeedController } from './controllers/feed.controller';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseService } from './services/database.service';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { WikipediaService } from './services/wikipedia.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [AppController],
-  providers: [AppService, DatabaseService],
+  controllers: [FeedController],
+  providers: [WikipediaService, DatabaseService],
 })
 export class AppModule implements OnModuleInit, NestModule {
   constructor(protected databaseService: DatabaseService) {}
