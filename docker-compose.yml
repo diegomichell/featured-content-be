@@ -1,11 +1,4 @@
 services:
-  featured-content:
-    build:
-      context: .
-      dockerfile: 'Dockerfile'
-    ports:
-      - '3000:3000'
-
   postgres:
     container_name: container-pg
     image: postgres
@@ -32,5 +25,17 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     restart: unless-stopped
 
+  featured-content:
+    build:
+      context: .
+      dockerfile: 'Dockerfile'
+    depends_on:
+      - postgres
+    ports:
+      - '3000:3000'
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_HOST: host.docker.internal
 volumes:
   postgres-data:
