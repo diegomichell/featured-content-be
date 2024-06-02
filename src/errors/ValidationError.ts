@@ -2,6 +2,7 @@ import BaseError from './BaseError';
 
 export enum ValidationErrorCodes {
   MissingParameter,
+  InvalidParameter,
 }
 
 export default class ValidationError extends BaseError {

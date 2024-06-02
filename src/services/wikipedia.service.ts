@@ -48,6 +48,11 @@ export class WikipediaService {
 
     const res = await this.httpClient.get<FeedResponse>(
       `/feed/v1/wikipedia/${language}/featured/${date.year}/${padNumber(date.month)}/${padNumber(date.day)}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
     );
 
     if (res.status != 200) {
@@ -56,6 +61,6 @@ export class WikipediaService {
       );
     }
 
-    return res.data;
+    return JSON.parse(res.data as any) as FeedResponse;
   }
 }

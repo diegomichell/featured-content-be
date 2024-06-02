@@ -9,11 +9,12 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseService } from './services/database.service';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { WikipediaService } from './services/wikipedia.service';
+import { TranslationService } from './services/translation.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
   controllers: [FeedController],
-  providers: [WikipediaService, DatabaseService],
+  providers: [WikipediaService, TranslationService, DatabaseService],
 })
 export class AppModule implements OnModuleInit, NestModule {
   constructor(protected databaseService: DatabaseService) {}

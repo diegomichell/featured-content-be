@@ -44,4 +44,8 @@ describe('FeedController (e2e)', () => {
       .get('/feed/en/featured/20240000x02/06/01')
       .expect(500);
   });
+
+  it('/feed/languages (GET)', () => {
+    return request(app.getHttpServer()).get('/feed/languages').expect(200);
+  });
 });
