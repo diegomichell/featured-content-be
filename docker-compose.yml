@@ -33,6 +33,8 @@ services:
       - postgres
     ports:
       - '3000:3000'
+    env_file:
+      - path: ./.env
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: root
